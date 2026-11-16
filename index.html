@@ -6,6 +6,9 @@
   <meta name="description" content="Portofolio profesional Ferdinan, Shipping Leader di Tangerang. Pengalaman B2B logistics, warehouse operations, KPI monitoring, dan process improvement.">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#1B2A41">
+  <script>
+    (function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.dataset.theme=t;document.documentElement.style.colorScheme=t;}catch(e){document.documentElement.dataset.theme='light';document.documentElement.style.colorScheme='light';}})();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -394,6 +397,128 @@ body{background:var(--paper)}
 .header-inner{box-shadow:0 14px 34px -20px #000}
 }
 
+/* ===== Rev 6: fix teks tak terbaca di kartu putih (mode gelap membalik variabel teks jadi terang) ===== */
+/* Kartu-kartu berlatar putih dikunci ke palet gelap lokal: variabel di elemen ini
+   menimpa variabel root mode gelap untuk semua turunannya, jadi teks selalu gelap di atas putih. */
+.step-card,.drop-card,.skill-group,.stage-panel,.contact-form-card{
+--ink:#14243C;--slate:#2E3D52;--gray:#3D4F68;--light:#F1F5F9;--line:#D7E0EA;--paper:#ffffff;--deep:#1B2A41;--on-deep:#ffffff;--amber:#92400E;
+background:#ffffff;color:#2E3D52;color-scheme:light}
+/* --- Galeri 9 langkah outbound: kontras penuh --- */
+.step-card{background:#ffffff}
+.step-no{background:#14243C;color:#ffffff}
+.step-kicker{color:#92400E}
+.step-body h4{color:#14243C;font-weight:800}
+.step-sub{color:#1B2A41;font-weight:700}
+.step-body p{color:#2E3D52;font-weight:500}
+.step-output{color:#2E3D52;border-top-color:#B6C4D4}
+.step-output strong{color:#14243C;font-weight:800}
+/* --- Kartu drop: teks gelap di atas putih --- */
+.drop-card h4{color:#14243C}
+.drop-lead,.drop-specs{color:#2E3D52}
+.drop-specs strong{color:#14243C}
+.drop-diagram{background:#F1F5F9;border-color:#D7E0EA}
+.drop-diagram figcaption{color:#3D4F68}
+.drop-badge{background:#14243C;color:#ffffff}
+.drop-badge.amber{background:#92400E;color:#ffffff}
+.drop-card.is-main{border-color:#14243C}
+/* --- Panel tahap shipping: teks gelap di atas putih --- */
+.stage-panel-heading h3{color:#14243C}
+.stage-panel-heading>p{color:#2E3D52}
+.panel-eyebrow{color:#3D4F68}
+.stage-details h4{color:#14243C}
+.stage-details ul{color:#2E3D52}
+.stage-meta>div{background:#F1F5F9;border-color:#D7E0EA}
+.stage-meta h4{color:#14243C}
+.stage-meta p{color:#2E3D52}
+/* --- Grup keahlian: teks gelap di atas putih --- */
+.skill-group-title h3{color:#14243C}
+.skill-group-title svg{color:#2E3D52}
+.skill-tags>span{background:#F1F5F9;border-color:#D7E0EA;color:#2E3D52;font-weight:600}
+/* --- Kartu form kontak: teks & input gelap di atas putih --- */
+.contact-form-card h3{color:#14243C}
+.contact-form-card>p{color:#2E3D52}
+.form-field label{color:#1B2A41}
+.form-field input,.form-field textarea{background:#ffffff;color:#14243C;border-color:#B6C4D4}
+.form-mailto{color:#3D4F68}
+.form-mailto a{color:#14243C}
+@media (prefers-color-scheme: dark){
+.step-card,.drop-card,.skill-group,.stage-panel,.contact-form-card{background:#ffffff;color:#2E3D52}
+.step-body h4,.step-output strong,.drop-card h4,.drop-specs strong,.stage-panel-heading h3,.stage-details h4,.stage-meta h4,.skill-group-title h3,.contact-form-card h3{color:#14243C}
+.step-sub,.form-field label{color:#1B2A41}
+.step-body p,.step-output,.drop-lead,.drop-specs,.stage-panel-heading>p,.stage-details ul,.stage-meta p,.contact-form-card>p{color:#2E3D52}
+}
+
+/* ===== Rev 7: mode gelap / terang manual (data-theme + localStorage) ===== */
+/* Variabel tema eksplisit: mengalahkan blok prefers-color-scheme lama,
+   jadi pilihan user selalu menang atas pengaturan sistem. */
+:root[data-theme="light"]{--ink:#1B2A41;--deep:#1B2A41;--paper:#ffffff;--on-deep:#ffffff;--slate:#2E3D52;--gray:#46586E;--light:#F1F5F9;--line:#E2E8F0;--amber:#B45309;--bg:#FAFAF9;--card:#ffffff;--card-alt:#F2F3F1;color-scheme:light}
+:root[data-theme="dark"]{--ink:#EAF1F8;--deep:#2E4A6E;--paper:#0F1B2C;--on-deep:#ffffff;--slate:#C7D3E2;--gray:#9DB0C6;--light:#182A42;--line:#2C405A;--amber:#E8A33D;--bg:#0C1421;--card:#16263C;--card-alt:#111E30;color-scheme:dark}
+body{background:var(--bg)}
+.hero{background:var(--bg)}
+.header-inner{gap:14px}
+/* --- Tombol saklar tema di nav pill: selalu terlihat, desktop & HP --- */
+.theme-toggle{display:inline-flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0;background:var(--light);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:9px 15px;font-size:12.5px;font-weight:700;line-height:1;transition:background .2s,border-color .2s}
+.theme-toggle:hover{border-color:var(--gray)}
+.theme-toggle svg{width:17px;height:17px;stroke-width:1.8;flex-shrink:0}
+.theme-toggle .icon-sun,.theme-toggle .label-light{display:none}
+[data-theme="dark"] .theme-toggle .icon-sun{display:block}
+[data-theme="dark"] .theme-toggle .icon-moon{display:none}
+[data-theme="dark"] .theme-toggle .label-light{display:inline}
+[data-theme="dark"] .theme-toggle .label-dark{display:none}
+@media(max-width:640px){.header-inner{gap:9px}.theme-toggle{padding:8px 11px;font-size:11.5px;gap:6px}.theme-toggle svg{width:15px;height:15px}}
+/* --- Penyesuaian mode terang saat sistem perangkat gelap --- */
+[data-theme="light"] .case-card{background:#F2F3F1}
+[data-theme="light"] .case-tags span,[data-theme="light"] .case-point,[data-theme="light"] .case-visual,[data-theme="light"] .case-info{background:#ffffff}
+[data-theme="light"] .case-desc{background:var(--light)}
+[data-theme="light"] .bar-plan{background:var(--deep)}
+[data-theme="light"] .nav-toggle span{background:var(--deep)}
+/* --- Mode gelap: permukaan & bayangan --- */
+[data-theme="dark"] .header-inner{box-shadow:0 14px 34px -20px #000}
+[data-theme="dark"] .operations-visual,[data-theme="dark"] .dashboard-preview,[data-theme="dark"] .profile-card{box-shadow:0 20px 45px -30px #000}
+[data-theme="dark"] .bar-plan{background:#5B7A9E}
+[data-theme="dark"] .nav-toggle span{background:var(--ink)}
+[data-theme="dark"] .button-primary{background:#2E4A6E;color:#ffffff}
+[data-theme="dark"] .button-primary:hover{background:#3A5F8A}
+[data-theme="dark"] .site-nav .nav-contact{background:#EAF1F8;color:#14243C!important}
+[data-theme="dark"] .site-nav .nav-contact:hover{background:#ffffff;color:#14243C!important}
+/* --- Case study di mode gelap --- */
+[data-theme="dark"] .case-card{background:var(--card-alt)}
+[data-theme="dark"] .case-tags span,[data-theme="dark"] .case-point,[data-theme="dark"] .case-visual,[data-theme="dark"] .case-info{background:var(--card)}
+[data-theme="dark"] .case-desc{background:var(--light)}
+/* --- Kartu yang dulu dikunci putih: di mode gelap jadi gelap + teks terang --- */
+[data-theme="dark"] .step-card,[data-theme="dark"] .drop-card,[data-theme="dark"] .skill-group,[data-theme="dark"] .stage-panel,[data-theme="dark"] .contact-form-card{--ink:#EAF1F8;--slate:#C7D3E2;--gray:#9DB0C6;--light:#182A42;--line:#2C405A;--paper:#16263C;--deep:#2E4A6E;--on-deep:#ffffff;--amber:#E8A33D;background:#16263C;color:#C7D3E2;color-scheme:dark}
+[data-theme="dark"] .step-no{background:#2E4A6E;color:#ffffff}
+[data-theme="dark"] .step-kicker{color:#E8A33D}
+[data-theme="dark"] .step-body h4{color:#EAF1F8}
+[data-theme="dark"] .step-sub{color:#EAF1F8}
+[data-theme="dark"] .step-body p{color:#C7D3E2}
+[data-theme="dark"] .step-output{color:#C7D3E2;border-top-color:#2C405A}
+[data-theme="dark"] .step-output strong{color:#EAF1F8}
+[data-theme="dark"] .drop-card h4{color:#EAF1F8}
+[data-theme="dark"] .drop-lead,[data-theme="dark"] .drop-specs{color:#C7D3E2}
+[data-theme="dark"] .drop-specs strong{color:#EAF1F8}
+[data-theme="dark"] .drop-card.is-main{border-color:#7C97B5}
+/* Diagram drop sengaja tetap inset terang di kedua mode agar SVG-nya terbaca persis seperti digambar */
+[data-theme="dark"] .drop-diagram{background:#F1F5F9;border-color:#D7E0EA}
+[data-theme="dark"] .drop-diagram figcaption{color:#3D4F68}
+[data-theme="dark"] .stage-panel-heading h3{color:#EAF1F8}
+[data-theme="dark"] .stage-panel-heading>p{color:#C7D3E2}
+[data-theme="dark"] .panel-eyebrow{color:#9DB0C6}
+[data-theme="dark"] .stage-details h4{color:#EAF1F8}
+[data-theme="dark"] .stage-details ul{color:#C7D3E2}
+[data-theme="dark"] .stage-meta>div{background:#182A42;border-color:#2C405A}
+[data-theme="dark"] .stage-meta h4{color:#EAF1F8}
+[data-theme="dark"] .stage-meta p{color:#C7D3E2}
+[data-theme="dark"] .skill-group-title h3{color:#EAF1F8}
+[data-theme="dark"] .skill-group-title svg{color:#C7D3E2}
+[data-theme="dark"] .skill-tags>span{background:#182A42;border-color:#2C405A;color:#C7D3E2}
+[data-theme="dark"] .contact-form-card h3{color:#EAF1F8}
+[data-theme="dark"] .contact-form-card>p{color:#C7D3E2}
+[data-theme="dark"] .form-field label{color:#EAF1F8}
+[data-theme="dark"] .form-field input,[data-theme="dark"] .form-field textarea{background:#0F1B2C;color:#EAF1F8;border-color:#2C405A}
+[data-theme="dark"] .form-mailto{color:#9DB0C6}
+[data-theme="dark"] .form-mailto a{color:#EAF1F8}
+
 </style>
 </head>
 <body>
@@ -401,6 +526,7 @@ body{background:var(--paper)}
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#beranda" aria-label="Ferdinan, kembali ke beranda"><span class="brand-symbol">F<span>.</span></span><span>FERDINAN<span class="brand-caption">SHIPPING LEADER</span></span></a>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Aktifkan mode gelap" title="Ganti mode gelap / terang"><svg class="icon-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 13.2A8.5 8.5 0 0 1 10.8 4 8.5 8.5 0 1 0 20 13.2Z"/></svg><svg class="icon-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M19.4 4.6l-1.8 1.8M6.4 17.6l-1.8 1.8"/></svg><span class="label-dark">Gelap</span><span class="label-light">Terang</span></button>
       <button id="nav-toggle" class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Buka navigasi"><span></span><span></span></button>
       <nav id="site-nav" class="site-nav" aria-label="Navigasi utama">
         <a href="#tentang">Tentang</a><a href="#pengalaman">Pengalaman</a><a href="#alur">Alur Shipping</a><a href="#proyek">Proyek</a><a class="nav-contact" href="#kontak">Mari Terhubung <span aria-hidden="true">↗</span></a>
@@ -824,6 +950,41 @@ body{background:var(--paper)}
         if (section) observer.observe(section);
       });
     }
+  }
+
+  // Toggle mode gelap / terang: klik mengganti tema tanpa reload,
+  // pilihan tersimpan di localStorage; tanpa pilihan, ikuti sistem.
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  const syncThemeToggle = () => {
+    const dark = document.documentElement.dataset.theme === 'dark';
+    if (themeToggle) {
+      themeToggle.setAttribute('aria-pressed', String(dark));
+      themeToggle.setAttribute('aria-label', dark ? 'Aktifkan mode terang' : 'Aktifkan mode gelap');
+    }
+    if (themeMeta) themeMeta.setAttribute('content', dark ? '#0C1421' : '#1B2A41');
+  };
+  if (themeToggle) {
+    syncThemeToggle();
+    themeToggle.addEventListener('click', () => {
+      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      document.documentElement.style.colorScheme = next;
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      syncThemeToggle();
+    });
+  }
+  const systemThemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  if (systemThemeQuery.addEventListener) {
+    systemThemeQuery.addEventListener('change', (event) => {
+      let savedTheme = null;
+      try { savedTheme = localStorage.getItem('theme'); } catch (e) {}
+      if (savedTheme) return;
+      const next = event.matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = next;
+      document.documentElement.style.colorScheme = next;
+      syncThemeToggle();
+    });
   }
 
   // Unduh CV: paksa nama file CV_Ferdinan.pdf.
